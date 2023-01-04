@@ -6,12 +6,10 @@ class Solution:
         
         matched, l = 0, 0
         for r in range(len(s2)):
-            print(l, r)
             if s2[r] in word_dict:
                 word_dict[s2[r]] -= 1
                 if word_dict[s2[r]] == 0:
                     matched += 1
-            
             if matched == len(word_dict):
                 return True
             
