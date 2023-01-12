@@ -69,21 +69,45 @@ class Solution:
 #         return res
 
 
+        # nums.sort()
+        # seen = set()
+        # print(nums)
+        # for i in range(len(nums)):
+        #     r = len(nums) - 1
+        #     l = i + 1
+        #     while l < r:
+        #         if nums[l] + nums[r] < -nums[i]:
+        #             l += 1
+        #         elif nums[l] + nums[r] > -nums[i]:
+        #             r -= 1
+        #         else:
+        #             if (nums[i], nums[l], nums[r]) not in seen:
+        #                 seen.add((nums[i], nums[l], nums[r]))
+        #             l += 1
+        #             r -= 1
+        # return list(seen)
+        
+        # sort the list first
         nums.sort()
+        # initialize a set so we don't include dupes
+        # store indices rather than numbers because there can be duplicate numbers
         seen = set()
-        print(nums)
+        # iterate through list
         for i in range(len(nums)):
-            r = len(nums) - 1
-            l = i + 1
+            # Two pointer two sum approach for every 0 - nums[i]
+            l, r = i + 1, len(nums) - 1
             while l < r:
+                # if smaller increment l
                 if nums[l] + nums[r] < -nums[i]:
                     l += 1
+                # if larger decrement r
                 elif nums[l] + nums[r] > -nums[i]:
                     r -= 1
                 else:
+                    # handling duplicates
                     if (nums[i], nums[l], nums[r]) not in seen:
                         seen.add((nums[i], nums[l], nums[r]))
-                    l += 1
+                    l += 1 
                     r -= 1
         return list(seen)
 
