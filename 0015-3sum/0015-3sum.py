@@ -47,26 +47,51 @@ class Solution:
 
 
 # ------ revisit ----------
+#         nums.sort()
+#         res = []
+#         print(nums)
+#         seen = set()
+#         for i in range(len(nums)):
+#             target = 0 - nums[i]
+#             l, r = i + 1, len(nums) - 1
+#             while l < r:
+#                 if nums[l] + nums[r] > target:
+#                     r -= 1
+#                 elif nums[l] + nums[r] < target:
+#                     l += 1
+#                 else:
+#                     if (nums[i], nums[l], nums[r]) not in seen:
+#                         res.append([nums[i], nums[l], nums[r]])
+#                         seen.add((nums[i], nums[l], nums[r]))
+                    
+#                     l += 1
+#                     r -= 1
+#         return res
+
+
         nums.sort()
-        res = []
-        print(nums)
         seen = set()
+        print(nums)
         for i in range(len(nums)):
-            target = 0 - nums[i]
-            l, r = i + 1, len(nums) - 1
+            r = len(nums) - 1
+            l = i + 1
             while l < r:
-                if nums[l] + nums[r] > target:
-                    r -= 1
-                elif nums[l] + nums[r] < target:
+                if nums[l] + nums[r] < -nums[i]:
                     l += 1
+                elif nums[l] + nums[r] > -nums[i]:
+                    r -= 1
                 else:
                     if (nums[i], nums[l], nums[r]) not in seen:
-                        res.append([nums[i], nums[l], nums[r]])
                         seen.add((nums[i], nums[l], nums[r]))
-                    
                     l += 1
                     r -= 1
-        return res
+        return list(seen)
+
+
+
+
+
+
 
 
 
