@@ -11,15 +11,21 @@ class Solution:
         #             insert_index += 1
         
         #dutch flag method:
+        # define variables
         l, r = 0, len(nums) - 1
-        curr = 0
-        while curr <= r:
-            if nums[curr] == 0:
-                nums[curr], nums[l] = nums[l], nums[curr]
+        pointer = 0
+        # while our current pointer is less than the rightmost boundary of 2s
+        while pointer <= r:
+            # if our pointer is 0, swap it with the rightmost boundary of 0s
+            if nums[pointer] == 0:
+                nums[l], nums[pointer] = nums[pointer], nums[l]
                 l += 1
-                curr += 1
-            elif nums[curr] == 1:
-                curr += 1
-            elif nums[curr] == 2:
-                nums[curr], nums[r] = nums[r], nums[curr]
-                r -= 1        
+                pointer += 1
+            # same thing if pointer is 2
+            elif nums[pointer] == 2:
+                nums[r], nums[pointer] = nums[pointer], nums[r]
+                r -= 1
+                # don't increment pointer here because the number swapped in might be 0
+                # this is not applicable for left pointer because we know if it was a 2 we would have sorted it already given that we are iterating from left to right
+            else:
+                pointer += 1
