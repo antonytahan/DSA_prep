@@ -5,8 +5,8 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        
         curr = head
-        curr2 = head
         middle = self.findMiddle(head)
         swap_node = middle.next
         middle.next = None
@@ -16,7 +16,7 @@ class Solution:
             swap_node.next = middle
             middle = swap_node
             swap_node = swap_node_next
-
+        
         while middle:
             if middle.val != curr.val:
                 return False
@@ -32,4 +32,5 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
         return slow
+            
         
