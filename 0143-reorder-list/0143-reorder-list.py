@@ -111,23 +111,8 @@ class Solution:
 #         return res.next if res.next else None
 
         curr = head
-        # middle = self.findMiddle(head)
-        
-        slow, fast = head, head
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-        
-        # reversed_head = self.reverseLL(slow)
-        prev = None
-        while slow:
-            next_node = slow.next
-            slow.next = prev
-            prev = slow
-            slow = next_node
-            
-        reversed_head = prev
-        curr = head
+        middle = self.findMiddle(head)
+        reversed_head = self.reverseLL(middle)
         
         while reversed_head:
             head_next, rev_head_next = curr.next, reversed_head.next
@@ -140,21 +125,21 @@ class Solution:
         if curr is not None:
             curr.next = None    
 
-#     def findMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-#         slow, fast = head, head
-#         while fast and fast.next:
-#             slow = slow.next
-#             fast = fast.next.next
-#         return slow
+    def findMiddle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
     
-#     def reverseLL(self, head: Optional[ListNode]) -> Optional[ListNode]:
-#         prev = None
-#         while head:
-#             next_node = head.next
-#             head.next = prev
-#             prev = head
-#             head = next_node
-#         return prev
+    def reverseLL(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        prev = None
+        while head:
+            next_node = head.next
+            head.next = prev
+            prev = head
+            head = next_node
+        return prev
     
     
             
