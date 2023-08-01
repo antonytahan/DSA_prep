@@ -52,17 +52,38 @@ class Solution:
         
 #-----revisit -------
     # 3 approaches:
+        # res = []
+        # for i in range(len(intervals)):
+        #     if newInterval[1] < intervals[i][0]:
+        #         res.append(newInterval)
+        #         return res + intervals[i:]
+        #     elif newInterval[0] > intervals[i][1]:
+        #         res.append(intervals[i])
+        #     else:
+        #         newInterval = (min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1]))
+        # res.append(newInterval)
+        # return res
+        
+        
+        # greedy
+        index, n = 0, len(intervals)
         res = []
-        for i in range(len(intervals)):
-            if newInterval[1] < intervals[i][0]:
-                res.append(newInterval)
-                return res + intervals[i:]
-            elif newInterval[0] > intervals[i][1]:
-                res.append(intervals[i])
+        while index < n and newInterval[0] > intervals[index][0]:
+            res.append(intervals[index])
+            index += 1
+        if not res or newInterval[0] > res[-1][1]:
+            res.append(newInterval)
+        else:
+            res[-1][1] = max(newInterval[1], res[-1][1])
+        while index < n:
+            if res[-1][1] < intervals[index][0]:
+                res.append(intervals[index])
             else:
-                newInterval = (min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1]))
-        res.append(newInterval)
+                res[-1][1] = max(intervals[index][1], res[-1][1])
+            index += 1
         return res
+            
+            
         
 
             
